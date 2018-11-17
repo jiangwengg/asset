@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_louceng_fangjianDaoImpl">
+
+	<sql id="table"> zichan_louceng_fangjian </sql>
+
+    <select id="findZlfangList"  parameterType="java.util.Map"  resultType="com.suyun.response.Zichan_louceng_fangjianResp">
+		SELECT  zlf.*  ,zl.mc   lou_cengMc,zl.bh  lou_cengBh,z.mc zichanMc,zlfx.mc xingzhiMc
+		FROM   zichan_louceng_fangjian  zlf,zichan_louceng   zl,zichan  z,zichan_louceng_fangjian_xingzhi   zlfx
+		WHERE  zlf.lou_ceng = zl.id  AND zlf.zichan =z.id  AND zlf.xingzhi=zlfx.id
+        <if test="keywords != null">
+           and  zlf.mc like concat('%', #{keywords}, '%')
+        </if>
+        <if test="zichan != null">
+           and  zlf.zichan = #{zichan}
+        </if>
+        <if test="louceng != null">
+           and  zlf.lou_ceng = #{louceng}
+        </if>
+          order by zlf.zichan,zlf.lou_ceng              
+    </select>
+
+
+    <select id="findZlfangById"  parameterType="java.lang.Long"  resultType="com.suyun.response.Zichan_louceng_fangjianResp">
+		SELECT  zlf.*  ,zl.mc   lou_cengMc,zl.bh  lou_cengBh,z.mc zichanMc,zlfx.mc xingzhiMc
+		FROM   zichan_louceng_fangjian  zlf,zichan_louceng   zl,zichan  z,zichan_louceng_fangjian_xingzhi   zlfx
+		WHERE  zlf.lou_ceng = zl.id  AND zlf.zichan =z.id  AND zlf.xingzhi=zlfx.id
+        <if test="_parameter != null">
+           and  zlf.id=#{_parameter}
+        </if>
+    </select>
+
+
+    <select id="findZlfjList"  parameterType="java.util.Map"  resultType="com.suyun.entity.Zichan_louceng_fangjian">
+		SELECT *  from   zichan_louceng_fangjian  zlf
+		where zt!=9
+        <if test="zichanId != null">
+           and  zlf.zichan=#{zichanId}
+        </if>
+        <if test="lcid != null">
+           and  zlf.lou_ceng=#{lcid}
+        </if>
+    </select>
+
+</mapper>

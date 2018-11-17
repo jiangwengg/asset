@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>控制台</title>
+	<link rel="stylesheet" href="../framework/layui/css/layui.css">
+	<script src="../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../framework/layui/layui.js"></script>
+	<script src="../js/public.js"></script>
+	<style>
+		.layui-header img{
+			height:40px;
+		}
+	</style>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<a class="my-menu-2" ref=""><div class="layui-logo">资产可视化管理系统</div></a>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+			<li class="layui-nav-item"><a class='my-menu-1' submenu="1">资产管理</a></li>
+			<li class="layui-nav-item"><a class='my-menu-1' submenu="2">能耗管理</a></li>
+<!-- 			<li class="layui-nav-item"><a class='my-menu-1' submenu="3">查询统计</a></li>
+ -->			<li class="layui-nav-item"><a class='my-menu-1' submenu="4">基础数据维护</a></li>
+             <li class="layui-nav-item"><a class='my-menu-1' submenu="5">系统维护</a></li>
+             <li class="layui-nav-item"><a class='my-menu-1' submenu="6">资产浏览</a></li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<div id = "username"></div>  <!-- 当前登录用户名 -->
+					<dl class="layui-nav-child">
+						<dd><a class="my-menu-2" ref="">基本资料</a></dd>
+						<dd><a class="my-menu-2" ref="">安全设置</a></dd>
+					</dl>
+				</li>
+			<li class="layui-nav-item"><a onclick="logout()">[退出]</a></li> 
+			</ul>
+		</div>
+		<!-- 左侧导航栏 -->
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll submenu" menu-id="1">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+<!-- 				<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/baseinfomanage.html">基本信息管理</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/loucengmanage.html">楼层管理</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="house/houselist.html">房间管理</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="house/bujulist.html">布局管理</a>
+				 	</li> -->
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/zichanmanage.html">资产维护</a> <!--  -->
+				 	</li>	
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/photomanage.html">四面照片维护</a>
+				 	</li>				 	
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/tuzhimanage.html">图纸维护</a>
+				 	</li>				 	
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/loucengmanage.html">楼层维护</a>
+				 	</li>	
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/fangjianmanage.html">房间维护</a>
+				 	</li>
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/dianbiaomanage.html?lx=1">电表维护</a>
+				 	</li>
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/dianbiaomanage.html?lx=2">水表维护</a>
+				 	</li>	
+ 			    	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="zichanguanli/zuobiaomanage.html">坐标维护</a>
+				 	</li>				 				 					 						 					 	
+				</ul>
+			</div>
+		  <div class="layui-side-scroll submenu" menu-id="2">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="nenghaoguanli/dianAdd.html?lx=1">电费登记</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="nenghaoguanli/dianAdd.html?lx=2">水费登记</a>
+				 	</li>
+				</ul>
+			</div>
+			<div class="layui-side-scroll submenu" menu-id="3">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="chaxuntongji/zichanCX.html">资产查询</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="">资产统计</a>
+				 	</li>
+				</ul>
+			</div>
+		   <div class="layui-side-scroll submenu" menu-id="4">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/zichan_quanli_xz.html">权利性质维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/zichan_shiyongren.html">使用人维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/zichan_gongyou.html">共有情况维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/zichan_quanli_lx.html">权利类型维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/zichan_louceng_fangjian_xingzhi.html">房间性质维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/danwei.html">单位名称维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/danwei_bumen.html">部门维护</a>
+				 	</li>
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="jichushujuweihu/danwei_bumen_yuangong.html">人员维护</a>
+				 	</li>
+				</ul>
+		    </div>
+		    <div class="layui-side-scroll submenu" menu-id="5">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="xitong/aqyhList.html">用户管理</a>
+				 	</li>
+<!-- 				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="xitong/yhfzList.html">用户分组管理</a>
+				 	</li> -->
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="xitong/cadChange.html">CAD转SVG</a>
+				 	</li>				 	
+				</ul>
+			</div>
+		    <div class="layui-side-scroll submenu" menu-id="6">
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+				 	<li class="layui-nav-item">
+				 		<a class="my-menu-2" ref="chaxuntongji/liulan.html">资产浏览</a>
+				 	</li>
+				</ul>
+			</div>			
+		</div>
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<iframe id="my-body" src="" style="height:98%; width:100%;border:0;"></iframe>
+		</div>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			2006-2018 @Copyright 六线速云有限公司
+		</div>
+	</div>
+</body>
+<script src="../js/main.js"></script>
+</html>

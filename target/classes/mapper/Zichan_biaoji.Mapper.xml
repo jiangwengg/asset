@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_biaojiDaoImpl">
+
+	<sql id="table"> zichan_biaoji </sql>
+
+    <select id="findBiaoJiList"  parameterType="java.util.Map"  resultType="com.suyun.response.Zichan_biaojiListResp">
+     	SELECT bj.*,fw.lx  fwlx,fw.fang_jian,fw.lou_ceng,fw.id fwid,lc.mc  lcmc,fj.mc fjmc,zc.mc zcmc 
+       	from zichan zc, <include refid="table" /> bj 
+       	LEFT JOIN
+			zichan_biaoji_fanwei fw
+		ON 
+			fw.biaoji=bj.id
+		LEFT JOIN 
+			zichan_louceng lc 
+		ON 
+			fw.lou_ceng = lc.id
+		LEFT JOIN 
+			zichan_louceng_fangjian fj
+		ON 
+			fw.fang_jian=fj.id
+         where bj.zichan=zc.id
+        <if test="zichan != null">
+          AND  bj.zichan = #{zichan}
+        </if>
+        <if test="lx != null">
+          AND  bj.lx = #{lx}
+        </if>
+        <if test="keywords != null">
+          AND  bj.mc  like concat('%', #{keywords}, '%')
+        </if>
+    </select>
+    
+     <select id="getBiaoJiByid"  parameterType="java.lang.Long"  resultType="com.suyun.response.Zichan_biaojiResp">
+        SELECT  bj.*,fw.id  fanweiId,fw.fang_jian,fw.lou_ceng,fw.lx  gllx,fw.zichan  
+        FROM   zichan_biaoji  bj  
+        LEFT JOIN  zichan_biaoji_fanwei   fw  ON  bj.id=fw.biaoji
+        where  bj.id=#{_parameter}
+     </select>
+
+
+
+     <select id="findBiaoJiListByLx"  parameterType="java.lang.String"  resultType="com.suyun.entity.Zichan_biaoji">
+        SELECT *  from  zichan_biaoji
+         where   lx=#{_parameter}
+     </select>
+
+</mapper>

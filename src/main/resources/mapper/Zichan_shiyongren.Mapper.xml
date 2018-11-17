@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.ZichanSYRDaoImpl">
+
+	<sql id="table">zichan_shiyongren</sql>
+
+    <select id="findsyrpage"  parameterType="java.util.Map"  resultType="com.suyun.entity.Zichan_shiyongren">
+       SELECT *  
+       from  <include refid="table" /> 
+      
+         where 1=1 AND zt = 1
+        <if test="mc != null">
+          AND  mc = #{mc}
+        </if>
+    </select>
+
+
+</mapper>

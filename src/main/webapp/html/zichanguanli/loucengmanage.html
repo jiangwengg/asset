@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>楼层管理</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+		<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		 <div class="layui-form-item">
+		 	 <label class="layui-form-label">资产名称</label>
+			 <div class="layui-input-inline" style="width: 180px ! important;" >
+   				<select id="zichanList" lay-filter="zcList" name="zichanId"  lay-search>
+     				<option class="zcOption" value="">请选择</option>
+   				</select>
+   		    </div>
+			<label class="layui-form-label">楼层名称</label>
+			<div class="layui-input-inline">
+				<input name="loucenghmc" id="loucenghmc" type="text" placeholder="输入楼层名称搜索" autocomplete="off" class="layui-input">
+			</div>
+			<label class="layui-form-label">编号</label>
+			<div class="layui-input-inline">
+				<input name="seachbh" id="seachbh" type="text" placeholder="输入编号搜索" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>资产名称</th>
+				<th>楼层名称</th>
+				<th>楼层编号</th>
+				<th>房间序列</th>
+				<th>总面积(m²)</th>
+				<th>操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	<!-- 新建用户或修改用户信息的弹层 -->
+	<div id="modifyUserDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyUserForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="Id" name="id" value="">
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">名称</label>
+    			<div class="layui-input-block">
+      				<input id="mc" type="text" name="mc" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+				<label class="layui-form-label">资产名称</label>
+				<div class="layui-input-block">
+					<select id="zichan-select" class="my-select" name="zichan" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+    			<label class="layui-form-label">编号</label>
+    			<div class="layui-input-block">
+      				<input id="bh" type="text" name="bh" lay-verify="required" placeholder="请输入编号" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+<!--   			<div class="layui-form-item">
+    			<label class="layui-form-label">面积(m²)</label>
+    			<div class="layui-input-block">
+      				<input id=mianji type="text" name="mianji" lay-verify="required" placeholder="请输入面积" autocomplete="off" class="layui-input">
+    			</div>
+  			</div> -->
+  			
+  			
+  			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+<script src="../../js/zichanguanli/loucengmanage.js"></script></html>

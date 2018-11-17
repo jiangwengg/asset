@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>坐标管理</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>	
+	<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=E7TBZ-FTIHF-YQDJC-JLYVM-3OMQT-K3BBI"></script>
+		<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+		* {
+            margin: 0px;
+            padding: 0px;
+        }
+        body,
+        button,
+        input,
+        select,
+        textarea {
+            font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+        }
+        p {
+            width: 603px;
+            padding-top: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">资产</label>
+			<div class="layui-input-inline" style="width: 180px ! important;" >
+   				<select id="zichanList" lay-filter="zcList" name="zichan"  lay-search>
+     				<option class="zcOption" value="">请选择</option>
+   				</select>
+   			</div>
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline" style="width: 180px ! important;" >
+      			<input id="keywords" type="text" name="keywords"  placeholder="请输入名称" autocomplete="off" class="layui-input">
+   			</div>      						
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>			
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>资产名称</th>
+				<th>编号</th>
+				<th>经度</th>
+				<th>纬度</th>
+				<th width="300px">操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	
+	<!-- 坐标管理的新增或者修改  -->
+	<div id="modifyDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="id"  name="id"  value="">
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">资产</label>
+				<div class="layui-input-block">
+					<select id="m-zichanList" class="my-select" name="zichan" lay-verify="required" lay-filter="zichanList"   lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">编号</label>
+    			<div class="layui-input-block">
+      				<input id="bianhao" type="text" name="bianhao" lay-verify="required" placeholder="请输入编号" autocomplete="off" class="layui-input" >
+    			</div>
+  			</div>   
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">经度</label>
+    			<div class="layui-input-block">
+      				<input id="zuobiao_x" type="text" name="zuobiao_x" lay-verify="required" placeholder="请定位" autocomplete="off" class="layui-input" readonly="readonly">
+    			</div>
+  			</div>     
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">纬度</label>
+    			<div class="layui-input-block">
+      				<input id="zuobiao_y" type="text" name="zuobiao_y" lay-verify="required" placeholder="请定位" autocomplete="off" class="layui-input" readonly="readonly">
+    			</div>
+  			</div>     						 	
+  			<iframe id="mapPage" width="100%" height="600px" frameborder=0
+			    src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp">
+			</iframe>		
+
+			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+ <script src="../../js/zichanguanli/zuobiaomanage.js"></script>
+</html>

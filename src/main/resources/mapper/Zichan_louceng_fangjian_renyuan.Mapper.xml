@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_louceng_fangjian_renyuanDaoImpl">
+
+	<sql id="table">zichan_louceng_fangjian_renyuan</sql>
+
+    <select id="getRenYuanByFj"  parameterType="java.util.Map"  resultType="com.suyun.response.Zichan_louceng_fangjian_renyuanResp">
+       SELECT ry.* ,syr.mc renyuanMc
+       from  <include refid="table" /> ry
+       left join  zichan_shiyongren  syr 
+       on   ry.renyuan=syr.id  where  syr.zt=1
+       <if test="fangjianId != null">
+          AND  ry.fang_jian = #{fangjianId}
+       </if>
+       <if test="zichan != null">
+          AND  ry.zichan = #{zichan}
+       </if>
+       <if test="lou_ceng != null">
+          AND  ry.lou_ceng = #{lou_ceng}
+       </if>
+    </select>
+
+
+    <delete id="deleteRenYuanByFilter" parameterType="java.util.Map">
+        delete from zichan_louceng_fangjian_renyuan where  zichan= #{zichan}  and lou_ceng=#{lou_ceng}  and fang_jian=#{fang_jian}
+    </delete>
+
+</mapper>

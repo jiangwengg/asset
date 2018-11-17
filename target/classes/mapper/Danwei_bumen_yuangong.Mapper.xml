@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Danwei_bumen_yuangongDaoImpl">
+
+	<sql id="table">danwei_bumen_yuangong</sql>
+
+    <select id="findYuangongPage"  parameterType="java.util.Map"  resultType="com.suyun.vo.YuangongVO">
+       SELECT yg.* ,bm.mc bmmc,dw.mc dwmc
+       	from  
+       		<include refid="table" /> yg
+      	LEFT JOIN 
+			danwei_bumen bm 
+		ON 
+			yg.bumen=bm.id
+		LEFT JOIN 
+			danwei dw 
+		ON
+			yg.danwei=dw.id
+         where 1=1 AND yg.zt = 1
+        <if test="mc != null">
+          AND  yg.mc = #{mc}
+        </if>
+    </select>
+
+
+</mapper>

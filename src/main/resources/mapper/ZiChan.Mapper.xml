@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.ZiChanDaoImpl">
+
+	<sql id="table"> zichan </sql>
+
+    <select id="findPageList"  parameterType="java.util.Map"  resultType="com.suyun.vo.ZiChanVO">
+       SELECT zc.* ,syr.mc syrmc,gy.mc gymc,qllx.mc qllxmc,qlxz.mc qlxzmc  
+       from  <include refid="table" /> zc
+       	LEFT JOIN
+			zichan_shiyongren syr 
+		ON 
+			zc.shiyongren=syr.id
+		LEFT JOIN 
+			zichan_gongyou gy 
+		ON 
+			zc.gongyou=gy.id
+		LEFT JOIN 
+			zichan_quanli_lx qllx 
+		ON 
+			zc.quanli_lx=qllx.id
+		LEFT JOIN 
+			zichan_quanli_xz qlxz ON zc.quanli_xingzhi=qlxz.id
+         where 1=1
+        <if test="keywords != null">
+          AND  zc.mc = #{keywords}
+        </if>
+        <if test="mc != null">
+          AND  zc.mc = #{mc}
+        </if>
+         <if test="quanli_lx != null">
+          AND  zc.quanli_lx = #{quanli_lx}
+        </if>
+         <if test="quanli_xingzhi != null">
+          AND  zc.quanli_xingzhi = #{quanli_xingzhi}
+        </if>  
+         <if test="zhengjian_zt != null">
+          AND  zc.zhengjian_zt = #{zhengjian_zt}
+        </if>                     
+    </select>
+
+    <select id="details"  parameterType="java.util.Map"  resultType="com.suyun.vo.ZiChanVO">
+         select  zc.* ,syr.mc syrmc,gy.mc gymc,qllx.mc qllxmc,qlxz.mc qlxzmc 
+         from  <include refid="table" /> zc
+         	LEFT JOIN
+			zichan_shiyongren syr 
+		ON 
+			zc.shiyongren=syr.id
+		LEFT JOIN 
+			zichan_gongyou gy 
+		ON 
+			zc.gongyou=gy.id
+		LEFT JOIN 
+			zichan_quanli_lx qllx 
+		ON 
+			zc.quanli_lx=qllx.id
+		LEFT JOIN 
+			zichan_quanli_xz qlxz ON zc.quanli_xingzhi=qlxz.id
+         where 1=1 and  zc.id=#{id}
+    </select>
+    
+	<select id="findIdMc"  parameterType="java.util.Map"  resultType="com.suyun.entity.Zichan">
+         select  id,mc
+         from  <include refid="table" /> 
+    </select>
+    
+    <select id="findZcList"  parameterType="java.util.Map"  resultType="com.suyun.entity.Zichan">
+       SELECT  *
+       from  <include refid="table" /> 
+    </select> 
+    
+</mapper>

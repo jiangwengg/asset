@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_sizhou_tupianDaoImpl">
+
+	<sql id="table"> zichan_sizhou_tupian </sql>
+
+    <select id="findZcTpList"  parameterType="java.util.Map"  resultType="com.suyun.response.Zichan_sizhou_tupianResp">
+		SELECT   z.mc,t.*   FROM   zichan  z ,  zichan_sizhou_tupian   t  
+		where  z.id = t.zichan
+        <if test="keywords != null">
+           and  z.mc like concat('%', #{keywords}, '%') 
+        </if>
+        <if test="zichan != null">
+           and  t.zichan = #{zichan}
+        </if>  
+    </select>
+
+
+
+
+
+</mapper>

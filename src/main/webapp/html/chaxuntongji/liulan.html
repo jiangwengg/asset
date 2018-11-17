@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>资产浏览</title>
+<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+<script src="../../framework/layui/layui.js"></script>
+<script src="../../js/public.js"></script>
+<script charset="utf-8"
+	src="https://map.qq.com/api/js?v=2.exp&key=E7TBZ-FTIHF-YQDJC-JLYVM-3OMQT-K3BBI"></script>
+</head>
+<style>
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body,button,input,select,textarea {
+	font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+}
+
+p {
+	width: 603px;
+	padding-top: 3px;
+	overflow: hidden;
+}
+
+#container {
+	min-width: 603px;
+	min-height: 767px;
+}
+.images{
+   height: 80px;
+   width: 80px;
+   padding: 10px;
+}
+</style>
+<body style="padding-left: 20px; padding-top:20px">
+	<!--   定义地图显示容器   -->
+	<div id="container"></div>
+
+
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			东面图：
+			<div class="layui-upload-list" id="showtpdongdz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			南面图：
+			<div class="layui-upload-list" id="showtpnandz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			西面图：
+			<div class="layui-upload-list" id="showtpxidz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			北面图：
+			<div class="layui-upload-list" id="showtpbeidz">
+			</div>
+		</blockquote>
+	</div>		
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			东南面图：
+			<div class="layui-upload-list" id="showtpdongnandz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			东西面图：
+			<div class="layui-upload-list" id="showtpdongxidz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			西南面图：
+			<div class="layui-upload-list" id="showtpxinandz">
+			</div>
+		</blockquote>
+	</div>
+	<div class="layui-upload">
+		<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+			西北面图：
+			<div class="layui-upload-list" id="showtpxibeidz">
+			</div>
+		</blockquote>
+	</div>			
+	
+	
+					
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>资产名称</th>
+				<th>楼层名称</th>
+				<th>楼层编号</th>
+				<th>总面积(m²)</th>
+				<th>操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+
+	<div  id="fangjianList" hidden="hidden"  style="padding: 10px;">
+		<table class="layui-table">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>资产</th>
+					<th>楼层</th>
+					<th>房间</th>
+					<th>面积</th>
+					<th>使用人员</th>
+				</tr>
+			</thead>
+			<tbody id="fangjian-table">
+			</tbody>
+		</table>
+		<div id="myfangjian-table"></div>
+  		<div class="centerBtn">
+     		<button class="layui-btn" id="cancelBtn">取消</button>
+    	</div>
+	</div>
+
+
+</body>
+<script type="text/javascript" src="../../js/chaxuntongji/liulan.js"></script>
+</html>

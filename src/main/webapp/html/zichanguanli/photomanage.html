@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>四周图片管理</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+		<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+		.images{
+		   height: 80px;
+		   width: 80px;
+		   padding: 10px;
+		}
+		
+		.layui-btn-sm {
+		    height: 20px;
+		    line-height: 20px;
+		    padding: 0 0px;
+		    font-size: 12px;
+		    margin-left: -20px;
+            margin-top: -65px;
+         }
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">资产</label>
+			<div class="layui-input-inline" style="width: 180px ! important;" >
+   				<select id="zichanList" lay-filter="zcList" name="zichan"  lay-search>
+     				<option class="zcOption" value="">请选择</option>
+   				</select>
+   			</div>
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline" style="width: 180px ! important;" >
+      			<input id="keywords" type="text" name="keywords"  placeholder="请输入名称" autocomplete="off" class="layui-input">
+   			</div>      						
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>			
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>资产名称</th>
+				<th>东面照片</th>
+				<th>西面照片</th>
+				<th>南面照片</th>
+				<th>北面照片</th>
+				<th>东南面照片</th>
+				<th>东北面照片</th>
+				<th>西南面照片</th>
+				<th>西北面照片</th>
+				<th width="300px">操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	
+	<!-- 房间管理的新增或者修改  -->
+	<div id="modifyDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="id"  name="id"  value="">
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">资产</label>
+				<div class="layui-input-block">
+					<select id="m-zichanList" class="my-select" name="zichan"  lay-filter="zichanList"   lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+  			</div>
+  			
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp1"   lay-data="{fangwei: 'dongdz'}" >东面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpdongdz">
+					</div>
+				</blockquote>
+			</div>
+
+			<div class="layui-upload">
+				<button type="button" class="layui-btn tp" id="tp2"  lay-data="{fangwei: 'nandz'}" >南面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpnandz">
+					</div>
+				</blockquote>
+			</div>
+			
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp3"  lay-data="{fangwei: 'xidz'}"  >西面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpxidz">
+					</div>
+				</blockquote>
+			</div>
+
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp4"  lay-data="{fangwei: 'beidz'}"  >北面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpbeidz">
+					</div>
+				</blockquote>
+			</div>
+			
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp12"  lay-data="{fangwei: 'dongnandz'}"  >东南面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpdongnandz">
+					</div>
+				</blockquote>
+			</div>			
+
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp14"  lay-data="{fangwei: 'dongbeidz'}"  >东北面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpdongbeidz">
+					</div>
+				</blockquote>
+			</div>	
+
+
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp32"  lay-data="{fangwei: 'xinandz'}"  >西南面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpxinandz">
+					</div>
+				</blockquote>
+			</div>	
+						
+
+			<div class="layui-upload">
+				<button type="button" class="layui-btn  tp" id="tp32"  lay-data="{fangwei: 'xibeidz'}"  >西北面图片上传</button>
+				<blockquote class="layui-elem-quote layui-quote-nm"
+					style="margin-top: 10px;">
+					预览图：
+					<div class="layui-upload-list" id="showtpxibeidz">
+					</div>
+				</blockquote>
+			</div>	
+															
+			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+ <script src="../../js/zichanguanli/photomanage.js"></script>
+ </html>

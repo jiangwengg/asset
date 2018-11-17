@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Aq_yhDaoImpl">
+
+	<sql id="table"> aq_yh </sql>
+
+
+   <select id="findAqYhPage"  parameterType="java.util.Map"  resultType="com.suyun.entity.Aq_yh">
+		SELECT *  from   <include refid="table" /> 
+		WHERE  1=1   AND   zt!=9
+        <if test="keywords != null">
+          AND ( xm like concat('%', #{keywords}, '%')  or yhm like concat('%', #{keywords}, '%') )
+        </if>
+    </select>
+
+</mapper>

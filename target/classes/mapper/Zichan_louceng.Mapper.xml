@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_loucengDaoImpl">
+
+	<sql id="table"> zichan_louceng </sql>
+
+    <select id="findZclList"  parameterType="java.lang.Long"  resultType="com.suyun.entity.Zichan_louceng">
+		SELECT  *
+		FROM    <include refid="table" />
+		WHERE 1=1 
+        <if test=" _parameter != null">
+           and zichan = #{_parameter}
+        </if>
+    </select>
+
+ <select id="findZcLouCengPage"  parameterType="java.util.Map"  resultType="java.util.HashMap">
+		SELECT lc.*,zc.mc zcmc ,GROUP_CONCAT(fj.mc) fjxl
+		FROM  zichan zc , <include refid="table" />  lc   LEFT JOIN  zichan_louceng_fangjian fj
+		ON   lc.id=fj.lou_ceng
+		WHERE   zc.id= lc.zichan   AND  lc.zt!=9
+        <if test="mc != null">
+          AND  lc.mc = #{mc}
+        </if>
+        <if test="bh != null">
+          AND  lc.bh = #{bh}
+        </if>
+        <if test="zichanId != null">
+          AND  lc.zichan = #{zichanId}
+        </if>
+        GROUP BY lc.zichan,lc.id
+        ORDER BY   lc.bh
+    </select>
+
+</mapper>

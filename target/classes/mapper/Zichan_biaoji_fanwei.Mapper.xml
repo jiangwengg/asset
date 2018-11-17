@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_biaoji_fanweiDaoImpl">
+
+	<sql id="table"> zichan_biaoji_fanwei </sql>
+
+    <select id="PageList"  parameterType="java.util.Map"  resultType="com.suyun.vo.NengHaoDengJiVO">
+     	SELECT
+      		fy.*,bj.id bjid,bj.mc bjmc,bj.bianhao bjbh,bj.lx bjlx,fw.lx fwlx ,zc.id zcid,zc.mc zcmc,
+			lc.id lcid, lc.mc lcmc,lcfj.id lcfjid,lcfj.mc lcfjmc
+       	from 
+       		 <include refid="table" /> fw
+       	LEFT JOIN
+			zichan_biaoji bj 
+		ON 
+			fw.biaoji=bj.id
+		LEFT JOIN 
+			zichan_biaoji_feiyong fy 
+		ON 
+			fy.biaoji = bj.id
+		LEFT JOIN 
+			zichan zc
+		ON 
+			fw.zichan=zc.id
+		LEFT JOIN 
+			zichan_louceng lc
+		ON
+			fw.lou_ceng=lc.id
+		LEFT JOIN 
+			zichan_louceng_fangjian lcfj
+		ON
+			fw.fang_jian=lcfj.id
+         where 1=1
+        <if test="zichan != null">
+          AND  zc.mc = #{zichan}
+        </if>
+        <if test="louceng != null">
+          AND  lc.mc = #{louceng}
+        </if>
+        <if test="fangjian != null">
+          AND  lcfj.mc = #{fangjian}
+        </if>
+    </select>
+
+
+</mapper>

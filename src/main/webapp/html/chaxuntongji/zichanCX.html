@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>资产查询</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+</head>
+	<style>
+	table{
+		text-align:center;
+	}
+	.layui-table th {
+		text-align:center;
+	}
+	#my-page{
+		text-align : center;
+	}
+	.layui-form-item .layui-input-inline {
+      width: 160px;
+   }
+   .layui-form-label {
+      padding: 9px 5px;
+    }
+</style>
+<body style="padding-left: 40px; padding-top:50px">
+<form id="paramFrom" class="layui-form" onsubmit="return false;">
+	<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline">
+				<input name="zc_mc" id="zc_mc" type="text" placeholder="输入名称搜索" autocomplete="off" class="layui-input">
+			</div>
+			<label class="layui-form-label">证件状态</label>
+			<div class="layui-input-inline">
+				<select id="zc_zhengjian_zt" class="my-select" name="zc_zhengjian_zt" lay-search>
+					<option value='' class="id"> 请选择</option>
+					<option value='0' class="id"> 未办理不动产权证</option>
+					<option value='1' class="id"> 已办理不动产权证</option>
+			    </select>
+			</div>
+			<label class="layui-form-label">权利类型</label>
+			<div class="layui-input-inline">
+				<select id="zc_quanli_lx"  name="zc_quanli_lx" class="my-select" lay-search>
+					<option value='' class="id"> 请选择</option>
+			    </select>
+			</div>
+			<label class="layui-form-label">权利性质</label>
+			<div class="layui-input-inline">
+				<select id="zc_quanli_xingzhi"  name="zc_quanli_xingzhi" class="my-select" lay-search>
+					<option value='' class="id"> 请选择</option>
+			    </select>
+			 </div>			
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+		</div>
+	<table class="layui-table" style="margin-top:20px">
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>权利人</th>
+					<th>共有情况</th>
+					<th>坐落</th>
+					<th>不动产单元号</th>
+					<th>权利类型</th>
+					<th>权利性质</th>
+					<th>用途</th>
+					<th>面积</th>
+					<th>使用期限</th>
+					<th>权利其他状况</th>
+					<th>人员名称</th>
+				</tr> 
+	  		</thead>
+			<tbody id="data-table">
+			</tbody>
+		</table>
+		<div id="my-page"></div>
+	</form>
+</body>
+<script type="text/javascript" src="../../js/chaxuntongji/zichanCX.js"></script>
+</html>

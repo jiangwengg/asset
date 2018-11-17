@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suyun.dao.impl.Zichan_biaoji_feiyongDaoImpl">
+
+	<sql id="table"> zichan_biaoji_feiyong </sql>
+
+    <select id="findBiaoJiFeiYongList"  parameterType="java.util.Map"  resultType="java.util.HashMap">
+     	SELECT  bj.mc,fy.*  
+     	FROM   zichan_biaoji  bj  ,zichan_biaoji_feiyong  fy
+        WHERE  bj.id=fy.biaoji
+        <if test="biaoji != null">
+          AND  fy.biaoji = #{biaoji}
+        </if>
+        <if test="bjlx != null">
+          AND  bj.lx = #{bjlx}
+        </if>
+        <if test="keywords != null">
+          AND  bj.mc  like concat('%', #{keywords}, '%')
+        </if>
+    </select>
+
+</mapper>

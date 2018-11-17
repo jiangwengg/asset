@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>电费登记管理</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+		<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline" style="width: 180px ! important;" >
+   				<select id="biaojiName" lay-filter="biaoji" name="biaojiName"  lay-search>
+     				<option class="zcOption" value="">请选择</option>
+   				</select>
+   			</div>
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>电表名称</th>
+				<th>人员数</th>
+				<th>开始日期</th>
+				<th>结束日期</th>
+				<th>费用(元)</th>
+				<th>人均费用(元)</th>
+				<th>操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	
+	<!-- 新建用户或修改电费登记的弹层 -->
+	<div id="modifyDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="id" name="id" value="">
+  			<div class="layui-form-item">
+				<label class="layui-form-label">电表名称</label>
+				<div class="layui-input-block">
+					<select id="biaoji" class="my-select" name="biaoji" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+    			<label class="layui-form-label">开始日期</label>
+    			<div class="layui-input-block">
+      				<input id="rq_kaishi" type="text" name="rq_kaishi" lay-verify="date"  placeholder="开始日期" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">结束日期</label>
+    			<div class="layui-input-block">
+      				<input id="rq_jieshu" type="text" name="rq_jieshu" lay-verify="required" placeholder="结束日期" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+			<div class="layui-form-item">
+    			<label class="layui-form-label">费用</label>
+    			<div class="layui-input-block">
+      				<input id="feiyong" type="text" name="feiyong" lay-verify="required" placeholder="请输入费用" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">人均费用</label>
+    			<div class="layui-input-block">
+      				<input id=feiyong_renjun type="text" name="feiyong_renjun"  placeholder="请输入人均费用" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">使用量</label>
+    			<div class="layui-input-block">
+      				<input id=shiyongliang type="text" name="shiyongliang"  placeholder="请输入使用量" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>  			
+  			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+<script src="../../js/nenghaodengji/dianAdd.js"></script></html>

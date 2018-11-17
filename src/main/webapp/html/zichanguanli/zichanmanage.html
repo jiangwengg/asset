@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>资产管理</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+		<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline">
+				<input name="zc_mc" id="zc_mc" type="text" placeholder="输入名称搜索" autocomplete="off" class="layui-input">
+			</div>
+			<label class="layui-form-label">证件状态</label>
+			<div class="layui-input-inline">
+				<select id="zc_zhengjian_zt" class="my-select" name="zc_zhengjian_zt" lay-search>
+					<option value='' class="id"> 请选择</option>
+					<option value='0' class="id"> 未办理不动产权证</option>
+					<option value='1' class="id"> 已办理不动产权证</option>
+			    </select>
+			</div>
+			<label class="layui-form-label">权利类型</label>
+			<div class="layui-input-inline">
+				<select id="zc_quanli_lx"  name="zc_quanli_lx" class="my-select" lay-search>
+					<option value='' class="id"> 请选择</option>
+			    </select>
+			</div>
+			<label class="layui-form-label">权利性质</label>
+			<div class="layui-input-inline">
+				<select id="zc_quanli_xingzhi"  name="zc_quanli_xingzhi" class="my-select" lay-search>
+					<option value='' class="id"> 请选择</option>
+			    </select>
+			 </div>			
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>名称</th>
+				<th>坐落</th>
+				<th>面积(㎡)</th>
+				<th>使用人</th>
+				<th>权利类型</th>
+				<th>权利性质</th>
+				<th>证件状态</th>
+				<th>操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	
+	<!-- 新建用户或修改用户信息的弹层 -->
+	<div id="modifyUserDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyUserForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="id" name="id" value="">
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">名称</label>
+    			<div class="layui-input-block">
+      				<input id="mc" type="text" name="mc" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+				<label class="layui-form-label">使用人</label>
+				<div class="layui-input-block">
+					<select id="shiyongren" class="my-select" name="shiyongren" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">共有情况</label>
+				<div class="layui-input-block">
+					<select id="gongyou" class="my-select" name="gongyou" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">坐落</label>
+    			<div class="layui-input-block">
+      				<input id="zuoluo" type="text" name="zuoluo" lay-verify="required" placeholder="请输入坐落位置" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">单元号</label>
+    			<div class="layui-input-block">
+      				<input id="danyuan_bh" type="text" name="danyuan_bh" lay-verify="required" placeholder="请输入单元号" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+				<label class="layui-form-label">权利类型</label>
+				<div class="layui-input-block">
+					<select id="quanli_lx" class="my-select" name="quanli_lx" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+  			
+  			<div class="layui-form-item">
+				<label class="layui-form-label">权利性质</label>
+				<div class="layui-input-block">
+					<select id="quanli_xingzhi" class="my-select" name="quanli_xingzhi" lay-search>
+						<option value class="id"> 请选择</option>
+					</select>
+				</div>
+			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">用途</label>
+    			<div class="layui-input-block">
+      				<input id="yongtu" type="text" name="yongtu" lay-verify="required" placeholder="请输入用途" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">开始时间</label>
+    			<div class="layui-input-block">
+      				<input id="qixian_kaishi" type="text" name="qixian_kaishi" lay-verify="required" placeholder="期限开始日期" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			 <div class="layui-form-item">
+    			<label class="layui-form-label">结束时间</label>
+    			<div class="layui-input-block">
+      				<input id="qixian_jieshu" type="text" name="qixian_jieshu" lay-verify="required" placeholder="期限结束日期" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">其他情况</label>
+    			<div class="layui-input-block">
+      				<input id="quanli_qita" type="text" name="quanli_qita" lay-verify="required" placeholder="请输入其他情况" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">面积(m²)</label>
+    			<div class="layui-input-block">
+      				<input id="mianji_pingfangmi" type="text" name="mianji_pingfangmi" lay-verify="required" placeholder="请输入面积(m²)" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">面积(亩)</label>
+    			<div class="layui-input-block">
+      				<input id="mianji_mu" type="text" name="mianji_mu" lay-verify="required" placeholder="请输入面积(亩)" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">图号</label>
+    			<div class="layui-input-block">
+      				<input id="tuhao" type="text" name="tuhao" lay-verify="required" placeholder="请输入图号" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">地号</label>
+    			<div class="layui-input-block">
+      				<input id="dihao" type="text" name="dihao" lay-verify="required" placeholder="请输入地号" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">使用面积</label>
+    			<div class="layui-input-block">
+      				<input id="mianji_shiyong" type="text" name="mianji_shiyong" lay-verify="required" placeholder="请输入使用面积" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">分摊面积</label>
+    			<div class="layui-input-block">
+      				<input id="mianji_fentan" type="text" name="mianji_fentan" lay-verify="required" placeholder="请输入分摊面积" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">证件编号</label>
+    			<div class="layui-input-block">
+      				<input id="zhengjian_bianhao" type="text" name="zhengjian_bianhao" lay-verify="required" placeholder="请输入证件编号" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">编号年份</label>
+    			<div class="layui-input-block">
+      				<input id="zhengjain_bianhao_nianfen" type="text" name="zhengjain_bianhao_nianfen" lay-verify="required" placeholder="请输入证件编号年份" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">发证日期</label>
+    			<div class="layui-input-block">
+      				<input id="zhengjian_rq" type="text" name="zhengjian_rq" lay-verify="required" placeholder="发证日期" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+				<label class="layui-form-label">认证状态</label>
+				<div class="layui-input-block">
+					<select id="zhengjian_zt" class="my-select" name="zhengjian_zt" lay-search>
+						<option value class="id"> 请选择</option>
+						<option value="0" class="id"> 未办理不动产权证</option>
+						<option value ="1" class="id"> 已办理不动产权证</option>
+					</select>
+				</div>
+			</div>
+  			
+  			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+<script src="../../js/zichanguanli/zichanmanage.js"></script></html>

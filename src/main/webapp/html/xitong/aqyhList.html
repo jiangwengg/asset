@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用户维护</title>
+	<link rel="stylesheet" href="../../framework/layui/css/layui.css">
+	<script src="../../framework/js/jquery-3.1.1.min.js"></script>
+	<script src="../../framework/layui/layui.js"></script>
+	<script src="../../js/public.js"></script>
+	<style>
+		#my-table{
+			text-align : center;
+		}
+		.layui-form-label {
+			width : 60px;
+		}
+		.layui-input-inline {
+			width : 130px ! important;
+		}
+		.rightText{
+		    position: absolute;
+            right: 10px;
+		}
+		.centerBtn{
+			margin-top:80px;
+			text-align: center;
+		}
+		.layui-table td, .layui-table th {
+		    position: relative;
+		    padding: 9px 15px;
+		    min-height: 20px;
+		    line-height: 20px;
+		    font-size: 14px;
+		    text-align: center;
+		}
+	</style>
+</head>
+<body style="padding-left: 40px; padding-top:50px">
+	<form id="paramFrom" class="layui-form" onsubmit="return false;">
+		<div class="layui-form-item">
+		
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-inline">
+				<input name="keywords" id="keywords" type="text" placeholder="输入名称搜索" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-input-inline" style="width:60px ! important;margin-left:20px">
+				<button id="searchBtn" class="layui-btn layui-btn-primary">搜索</button>
+			</div>
+			<div class="rightText" style="width:60px ! important">
+				<button id="addBtn" class="layui-btn">新增</button>
+			</div>
+		</div>
+	</form>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>姓名</th>
+				<th>用户名</th>
+				<th>座机</th>
+				<th>手机</th>
+				<th>邮箱</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr> 
+  		</thead>
+		<tbody id="data-table">
+		</tbody>
+	</table>
+	<div id="my-table"></div>
+	<!-- 新建用户或修改用户信息的弹层 -->
+	<div id="modifyUserDiv" hidden="hidden" style="padding: 50px">
+		<form id="modifyUserForm" class="layui-form" onsubmit="return false;">
+			<input type="hidden" id="id" name="id" value="">
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">姓名</label>
+    			<div class="layui-input-block">
+      				<input id="xm" type="text" name="xm" lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">用户名</label>
+    			<div class="layui-input-block">
+      				<input id="yhm" type="text" name="yhm" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>  			
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">密码</label>
+    			<div class="layui-input-block">
+      				<input id="mm" type="password" name="mm" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">座机</label>
+    			<div class="layui-input-block">
+      				<input id="zuoji" type="text" name="zuoji"  placeholder="请输入座机" autocomplete="off" class="layui-input">
+    			</div>
+  			</div> 
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">手机</label>
+    			<div class="layui-input-block">
+      				<input id="shouji" type="text" name="shouji"  placeholder="请输入手机" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>  
+  			<div class="layui-form-item">
+    			<label class="layui-form-label">邮箱</label>
+    			<div class="layui-input-block">
+      				<input id="email" type="text" name="email" lay-verify="email"  placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+    			</div>
+  			</div>   						   			    			
+  			<div class="centerBtn">
+	      		<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+	      		<button class="layui-btn" id="cancelBtn">取消</button>
+      		</div>
+		</form>
+	</div>
+	
+	
+</body>
+<script src="../../js/xitong/aqyhList.js"></script></html>
